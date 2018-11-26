@@ -1,0 +1,17 @@
+br-task-form {
+  .invisible {
+    display: none;
+  }
+
+  .cloudy {
+    background-color: map-get($colors, cloudy);
+  }
+
+  .show-field {
+    height: 2.5rem;
+  }
+
+  .task-name {
+    font-size: 1.4rem;
+  }
+}

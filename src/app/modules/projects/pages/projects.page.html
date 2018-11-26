@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Projects
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!isUserObserver" (click)="openModal()">
+        <ion-icon name="add" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [class.page-loaded]="boards != null">
+
+  <ion-refresher (ionRefresh)="refreshProjects($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-round-down"
+      pullingText="Pull to refresh"
+      refreshingText="Fetching data...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="boards != null && boards.length > 0">
+    <ion-item-group *ngFor="let board of boards">
+
+      <ion-item-divider color="light" *ngIf="showDivider(board)">
+        {{ board.workspace }}
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let project of board.projects">
+        <ion-item tappable text-wrap (click)="openProject(project.id)">
+          <ion-icon item-left name="star" color="primary" *ngIf="project.star"></ion-icon>
+          <ion-icon item-left name="star-outline" color="primary" *ngIf="!project.star"></ion-icon>
+          <h2>{{ project.name }}</h2>
+          <p *ngIf="project.description">{{ project.description }}</p>
+        </ion-item>
+
+        <ion-item-options side="right">
+          <button ion-button color="light" icon-left (click)="archiveProject(board.workspace_id, project.id)">
+            Archive
+          </button>
+          <button ion-button color="danger" icon-left (click)="deleteProject(board.workspace_id, project.id)">
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list *ngIf="boards !=null && boards.length === 0">
+    <ion-item no-lines>
+      <ion-icon name="filing" item-left></ion-icon>
+      <div text-center>You don't have any projects</div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

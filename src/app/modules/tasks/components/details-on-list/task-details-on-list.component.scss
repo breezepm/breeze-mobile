@@ -1,0 +1,79 @@
+@import '../../../../../sass/variables';
+
+task-details-on-list {
+  div.task-team {
+    .user-avatar {
+      display: block;
+      float: right;
+    }
+
+    img.user-avatar,
+    p.no-avatar {
+      height: 25px;
+      width: 25px
+    }
+
+    ion-avatar {
+      min-height: 25px;
+      min-width: 25px;
+    }
+
+    p {
+      &.no-avatar {
+        line-height: 25px;
+      }
+    }
+  }
+
+  .task-item {
+    display: inline;
+    line-height: 24px;
+    padding-right: 20px;
+    white-space: normal;
+  }
+
+  .task-team {
+    float: left;
+    margin-left: -12px;
+  }
+
+  .color-stripe {
+    border: 0;
+    border-radius: 0;
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4px;
+  }
+
+  .card-cover {
+    max-width: 100%;
+  }
+
+  .tag-pill {
+    background: $light-white;
+    color: $grey;
+    margin: 0 5px 0 0;
+    padding: 0 7px;
+
+    &[style*="background:rgb"],
+    &[style*="background: rgb"] {
+      color: $tag-pill-color;
+      opacity: .9;
+    }
+  }
+
+  .card-attribute {
+    display: inline-block;
+    margin-top: 6px;
+    padding-right: 8px;
+  }
+
+  .avatar-container {
+    display: inline-block;
+    float: right;
+    margin-left: 18px;
+  }
+}

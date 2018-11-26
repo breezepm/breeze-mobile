@@ -1,0 +1,16 @@
+@import '../../../theme/variables';
+
+page-more {
+  br-user-avatar {
+    width: 28px !important;
+    height: 28px !important;
+    line-height: 28px !important;
+
+    .user-avatar,
+    .no-avatar {
+      width: 28px !important;
+      height: 28px !important;
+      line-height: 28px !important;
+    }
+  }
+}

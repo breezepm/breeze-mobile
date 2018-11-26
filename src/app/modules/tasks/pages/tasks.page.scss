@@ -1,0 +1,130 @@
+@import '../../../../sass/variables';
+
+page-tasks-by-date {
+  ion-list ion-item-group ion-item-group:last-child .item-inner {
+    border-bottom: 0 !important;
+  }
+}
+
+page-tasks-by-projects {
+ .list-ios, .list-md {
+    margin-bottom: 0 !important;
+  }
+  ion-infinite-scroll {
+    border-top: 0 !important;
+  }
+}
+
+page-tasks-by-projects,
+page-tasks-by-date {
+  ion-item-group .item-inner .input-wrapper ion-label.label-ios {
+    margin: 13px 8px 13px 0;
+  }
+
+  ion-item-group .item-ios:last-child .item-inner, ion-item-group .item-wrapper:last-child .item-ios .item-inner {
+    border-bottom: .55px solid $ghost;
+  }
+
+  ion-list ion-item-group ion-item-group ion-item-group:last-child ion-item:last-child .item-inner {
+    border-bottom:0 !important;
+    margin-bottom: 1.5rem;
+  }
+
+  ion-list.list-ios > ion-item-group {
+    border-bottom: .55px solid $ghost;
+  }
+
+  .stage-name-divider {
+    background-color: $white;
+    border-bottom: .55px solid $ghost;
+    font-weight: $divider-font-weight;
+  }
+
+  .dashboard-group-divider {
+    font-size: 1.2em;
+    text-transform: none;
+  }
+
+  .list-item {
+    color: $dark-grey;
+    font-size: 1.6rem;
+  }
+
+  .load-more {
+    border-bottom: 0 !important;
+    color: $light-blue;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+
+    .item-inner {
+      border-bottom: 0 !important;
+    }
+  }
+
+  .empty-dashboard {
+    color: $grey;
+    font-size: 2.2rem;
+    margin-top: 4rem;
+    text-align: center;
+
+    ion-icon {
+      color: $light-grey;
+      display: block;
+      font-size: 30rem;
+    }
+  }
+
+  .card-status {
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 4px, rgba(255, 255, 255, .5) 4px, rgba(255, 255, 255, .5) 9px);
+    color: $content;
+    padding: 1px 5px !important;
+  }
+
+  .done {
+    background-color: $done-label;
+  }
+
+  .on-hold {
+    background-color: $on-hold-label;
+  }
+
+  .ready {
+    background-color: $ready-label;
+  }
+
+  .blocked {
+    background-color: $blocked-label;
+  }
+
+  .card-attributes-dashboard {
+    color: $grey;
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    margin-bottom: 4px;
+    white-space: normal;
+
+    .card-attribute:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .custom-spinner {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    transform: scale(1.5);
+  }
+
+  ion-item-group .item-md:last-child .item-inner, ion-item-group .item-md .item-wrapper:last-child .item-inner {
+    border-bottom: 1px solid $gainsboro;
+  }
+
+  [text-wrap] .label-md {
+    color: $dark-grey;
+    font-size: 1.5rem;
+  }
+}

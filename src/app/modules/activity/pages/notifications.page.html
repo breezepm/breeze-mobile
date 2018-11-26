@@ -1,0 +1,58 @@
+<ion-content class="cards-bg social-cards" [class.page-loaded]="notifications != null">
+  <ion-refresher (ionRefresh)="refreshNotifications($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-round-down"
+      pullingText="Pull to refresh"
+      refreshingText="Fetching data...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-item-group>
+    <ion-list>
+      <ng-container *ngFor="let notification of notifications; trackBy: trackByFn">
+        <ion-item-sliding #slidingItem>
+          <ion-item tappable text-wrap
+            [ngClass]="{'marked-unread': notification.marked }"
+            (click)="openTask(notification.card_id, notification.project.id, notification.id, slidingItem, notification.marked)">
+              <br-user-avatar
+                [avatar]="notification.creator.avatar"
+                [background]="notification.creator.color"
+                [initials]="notification.creator.initials">
+              </br-user-avatar>
+              <div class="text-col">
+                <p class="notification-creator">
+                  <strong>{{ notification.creator.name }}</strong>
+                </p>
+                <p [innerHTML]="notification.desc | safeHtml" class="description"></p>
+                <ion-row class="notification-footer">
+                  <ion-col class="item-notification project-name" col-12>
+                    <p>Posted on {{ notification.created_at | date:'longDate' }} to
+                      <strong>{{ notification.project.name }}</strong>
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </div>
+          </ion-item>
+          <ion-item-options side="right">
+            <ng-container>
+              <button ion-button (click)="changeNotificationStatus(notification.id, !notification.marked, slidingItem)">
+                <span *ngIf="!notification.marked">Mark as read</span>
+                <span *ngIf="notification.marked">Marked as unread</span>
+              </button>
+            </ng-container>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ng-container>
+    </ion-list>
+  </ion-item-group>
+  <ion-infinite-scroll (ionInfinite)="loadMoreNotifications($event)" threshold="90%">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ng-container *ngIf="isNotificationsEmpty$ | async">
+    <ion-row>
+      <ion-col col-12 text-center class="grey-text">
+        <h3>No notifications</h3>
+        <h5>You'll see notifications here when someone mentions you in tasks or comments.</h5>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+</ion-content>

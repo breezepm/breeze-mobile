@@ -1,0 +1,11 @@
+@import '../../../../../sass/variables';
+
+modal-task-dates {
+  .content {
+    background-color: $background-gray;
+  }
+
+  ion-header.header.header-ios {
+    border-bottom: 1px solid $grey-border;
+  }
+}

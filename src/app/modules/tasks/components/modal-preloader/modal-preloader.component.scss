@@ -1,0 +1,20 @@
+@import '../../../../../sass/variables';
+
+:Host {
+  display: block;
+}
+
+.modal-preloader {
+  height: 0;
+  opacity: 1;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+
+  .bar {
+    background-color: $preloaderBackground;
+    height: 2px;
+    width: 0%;
+  }
+}

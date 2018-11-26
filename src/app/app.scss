@@ -1,0 +1,84 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@import '../sass/variables';
+
+.progress-bar {
+  position: relative;
+}
+
+ion-app.ios .progress-bar {
+  top: 63px;
+}
+
+ion-app.md .progress-bar {
+  top: 56px;
+}
+
+.page-loaded {
+  background-color: $background-gray;
+}
+
+ion-infinite-scroll {
+  border-top: 1px solid $light-grey;
+}
+
+blockquote {
+  border-left: solid 2px $pure-blue;
+  margin-left: 0;
+  padding-left: 5px;
+}
+
+ion-popover {
+  .list-ios {
+    margin-bottom: 1px;
+  }
+
+  .list-ios > .item-block:last-child {
+    border-bottom: 0;
+  }
+}
+
+[contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+[contenteditable]:empty:before {
+  color: $grey;
+  content: attr(placeholder);
+  display: block;
+}
+
+.list-header-md {
+  background: transparent;
+  color: $dark-grey;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: .1rem;
+  margin-bottom: 0;
+  padding-left: 16px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+em {
+  font-style: normal;
+}
+
+.mention {
+  font-weight: bold;
+}

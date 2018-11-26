@@ -1,0 +1,58 @@
+@import '../../../sass/variables';
+
+.scrollable-menu {
+  display: block;
+  height: auto;
+  margin-left: 5% !important;
+  max-height: 200px;
+  overflow: auto;
+  position: absolute;
+  width: 90%;
+  z-index: 999999;
+}
+
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  background: white;
+  border: 1px solid $grey-border-color;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+  li {
+    align-items: center;
+    display: flex;
+    min-height: 35px;
+    font-size: 14px;
+
+    .name {
+      display: inline-block;
+    }
+  }
+
+  .active {
+    background-color: $active-mention-background;
+
+    .dropdown-item {
+      color: $dark-grey;
+    }
+  }
+
+  .dropdown-item {
+    color: $mention-menu-color;
+    display: block;
+    padding: 2px 8px;
+  }
+}
+
+[hidden] {
+  display: none;
+}
+
+mention-list {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

@@ -1,0 +1,52 @@
+// colors
+$black: #000;
+$white: #fff;
+$light-white: #eee;
+$light-grey: #ddd;
+$dark-grey: #333;
+$light-blue: #387ef5;
+$aluminium: #8e9093;
+$pure-blue: #007aff;
+$gainsboro: #dedede;
+$grey: #999;
+$ghost: #c8c7cc;
+$yellow: #ffeb3b;
+$grey-border: #c8c7cc;
+$red: #ff0000;
+
+// fonts
+$font-weight-light: 200;
+$font-weight-normal: 400;
+$primary-font: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+
+// colors for specific app part
+$divider: #f5f5f5;
+$divider-background: #f7f7f7;
+$divider-font-weight: 500;
+$content: #222;
+$tag-pill-color: #fafafa;
+$ready-label: #4cd964;
+$on-hold-label: rgba(255, 204, 0, .8);
+$blocked-label: rgba(255, 59, 48, .8);
+$done-label: rgba(204, 204, 204, .8);
+$black-border: rgba(0, 0, 0, .2);
+$grey-border-color: #bebebe;
+$active-mention-background: #e7effe;
+
+$background-gray: #efeff4;
+$stage-name-background-color: #f8f8f8;
+
+$preloaderBackground: #387ef5;
+
+$marked-notification-background: lighten($light-grey, 5%);
+$marked-notification-color: $dark-grey;
+
+$mention-menu-color: $dark-grey;
+$mention-menu-background: $light-white;
+$mention-menu-active-background: $dark-grey;
+$mention-menu-active-color: $light-white;
+$mention-border-color: $mention-menu-active-background;
+
+//$background-ios-color: #efeff4;
+//$background-md-color: #efeff4;
+//$background-wp-color: #efeff4;

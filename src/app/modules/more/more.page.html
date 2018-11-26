@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Account
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-loaded">
+  <ion-list padding-top>
+    <ion-item detail-none *ngIf="user != null; else noUserComp">
+      <ion-icon item-left>
+        <br-user-avatar [avatar]="user.avatar" [background]="user.color" [initials]="user.initials"></br-user-avatar>
+      </ion-icon>
+      <span>{{ user.name }}</span>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noUserComp>
+    <ion-item no-lines>
+      <ion-icon class="avatar-placeholder" name="contact" item-left color="primary"></ion-icon>
+      <span>User name</span>
+    </ion-item>
+  </ng-template>
+
+  <ion-list>
+    <ion-list-header>
+      Actions
+    </ion-list-header>
+    <button ion-item (click)="openSearchModal()">
+      <ion-icon name="search" item-start></ion-icon>
+      Search
+    </button>
+  </ion-list>
+
+  <ion-list radio-group *ngIf="showTeamsList" class="teams-list">
+    <ion-list-header>
+      Teams
+    </ion-list-header>
+    <ion-item tappable text-left *ngFor="let team of teams" class="team-name">
+      <ion-label>Team: {{ team.name }}</ion-label>
+      <ion-radio
+        value="team.team_id"
+        (click)="selectTeam(team.team_id)"
+        [checked]="team.team_id === selectedTeamId">
+      </ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item detail-none (click)="logout()" tappable class="logout-button">
+      <ion-icon name="log-out" color="primary" item-left></ion-icon>
+      <span>Sign Out</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

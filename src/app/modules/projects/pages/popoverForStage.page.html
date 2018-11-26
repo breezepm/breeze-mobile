@@ -1,0 +1,8 @@
+<ion-list radio-group>
+  <ng-container *ngIf="isTablet">
+    <button ion-item detail-none (click)="deleteStage()">Delete List</button>
+  </ng-container>
+  <ng-container *ngIf="!isTablet">
+    <button ion-item (click)="deleteStage()">Delete List</button>
+  </ng-container>
+</ion-list>

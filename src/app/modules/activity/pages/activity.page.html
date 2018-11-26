@@ -1,0 +1,40 @@
+<ion-content class="cards-bg social-cards" [class.page-loaded]="activities != null">
+  <ion-refresher (ionRefresh)="refreshActivities($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-round-down"
+      pullingText="Pull to refresh"
+      refreshingText="Fetching data...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngFor="let divider of activities">
+    <ion-item-group>
+      <ion-item-divider sticky class="sticky-divider">{{ divider.date_group | date:'EEEE, MMMM d' }}</ion-item-divider>
+      <ion-item tappable text-wrap *ngFor="let activity of divider.audits; trackBy: trackByFn"
+          (click)="openTask(activity.card.id, activity.project.id, activity.stage.id)">
+          <div>
+            <br-user-avatar
+              [avatar]="activity.user.avatar"
+              [background]="activity.user.color"
+              [initials]="activity.user.initials"
+            >
+            </br-user-avatar>
+          </div>
+          <p class="activity-msg">
+          <b>{{ activity.user.name }}</b>
+          <span [innerHTML]="activity.message | safeHtml"></span>
+        </p>
+        <ion-row class="activity-footer">
+          <ion-col class="item-activity project-name" col-9>
+            <p>{{ activity.project.name }}</p>
+          </ion-col>
+          <ion-col class="item-activity date" col-3>
+            <p>{{ activity.created_at | date:'shortTime' }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-item-group>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="loadMoreActivities($event)" threshold="90%">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-title>Tasks</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openPopover($event)">
+        <ion-icon name="more" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [class.page-loaded]="!isFetchTasksPending && !isDashboardCardsEmpty">
+  <ion-refresher (ionRefresh)="refreshDashboardCards($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-round-down"
+      pullingText="Pull to refresh"
+      refreshingText="Fetching data...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <span class="custom-spinner" *ngIf="isFetchTasksPending">
+    <ion-spinner name="circles"></ion-spinner>
+  </span>
+
+  <div *ngIf="!isFetchTasksPending">
+    <ion-list *ngIf="!isDashboardCardsEmpty; else noTasksComp">
+      <ion-item-group *ngFor="let dashboardGroup of dashboardCards">
+        <ion-list-header  sticky class="divider dashboard-group-divider">
+          {{ dashboardGroup.duedate_block_name }}
+        </ion-list-header >
+        <ion-item-group *ngFor="let card of dashboardGroup.cards"
+                        (click)="openTask(dashboardGroup.dashboard_layout, card.stage.id, card, dashboardGroup.duedate_block)">
+          <ion-item tappable class="divider list-item">
+            <task-details-on-list [card]="card" [hasBreadcrumbs]="true"></task-details-on-list>
+          </ion-item>
+        </ion-item-group>
+        <ion-item tappable class="load-more"
+                  *ngIf="dashboardGroup.next_page"
+                  (click)="loadMoreTasks({
+                    group: dashboardGroup.duedate_block,
+                    page: dashboardGroup.page,
+                    userId: selectedUserId
+                  })">
+          <span *ngIf="!loadingTasks">Load More</span>
+          <ion-spinner name="dots" *ngIf="loadingTasks"></ion-spinner>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+
+    <ng-template #noTasksComp>
+      <div class="empty-dashboard">
+        <div>No tasks assigned!</div>
+        <ion-icon name="menu"></ion-icon>
+      </div>
+    </ng-template>
+  </div>
+</ion-content>

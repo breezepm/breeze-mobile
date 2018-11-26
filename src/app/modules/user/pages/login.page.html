@@ -1,0 +1,29 @@
+<ion-content class="signup-page stable-bg login-page">
+  <div class="logo">
+    <h1>Breeze</h1>
+  </div>
+  <div class="list-outer">
+    <form-error [serverLoginErrors$]="serverErrorsStream$"></form-error>
+    <form [formGroup]="form" (submit)="handleLogin()">
+      <ion-list no-lines>
+        <ion-item class="login-inputs">
+          <ion-icon item-left name="person" class="auth-input"></ion-icon>
+          <ion-input class="custom-input" formControlName="email" type="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <ion-item class="login-inputs">
+          <ion-icon item-left name="lock" class="auth-input"></ion-icon>
+          <ion-input class="custom-input" formControlName="password" type="password" placeholder="Password"></ion-input>
+        </ion-item>
+      </ion-list>
+      <button class="submit-button" ion-button block outline>Sign in</button>
+    </form>
+    <br-google-login [isSignUp]="false"></br-google-login>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <div class="sign-up" text-center>
+    <button ion-button clear (click)="navigateToSignUp()">Sign up</button>
+  </div>
+</ion-footer>
+

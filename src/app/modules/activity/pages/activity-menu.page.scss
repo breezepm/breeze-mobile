@@ -1,0 +1,14 @@
+@import '../../../../sass/variables';
+
+.tabs-md {
+  .tabbar {
+    top: 55px !important;
+    border-bottom: 1px solid $grey-border;
+  }
+}
+
+.segment-ios {
+  ion-segment-button {
+    max-width: 40% !important;
+  }
+}

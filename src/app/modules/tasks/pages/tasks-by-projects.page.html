@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-title>Tasks</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openPopover($event)">
+        <ion-icon name="more" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [class.page-loaded]="!isFetchTasksPending">
+  <ion-refresher (ionRefresh)="refreshDashboardCards($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-round-down"
+      pullingText="Pull to refresh"
+      refreshingText="Fetching data...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <span class="custom-spinner" *ngIf="isFetchTasksPending">
+    <ion-spinner name="circles"></ion-spinner>
+  </span>
+
+  <ng-container *ngIf="!isFetchTasksPending">
+    <ion-list *ngIf="!isDashboardCardsEmpty; else noTasksComp">
+      <ion-item-group *ngFor="let dashboardGroup of dashboardCards">
+        <ion-list-header text-wrap class="divider dashboard-group-divider">{{ dashboardGroup.project_name }}</ion-list-header>
+        <ion-item-group *ngFor="let stage of dashboardGroup.stages">
+          <ion-item-divider sticky text-wrap class="divider stage-name-divider">
+            {{ stage.stage_name }}
+          </ion-item-divider>
+          <ion-item-group *ngFor="let card of stage.cards">
+             <ion-item
+              tappable
+              class="divider list-item"
+              (click)="openTask(dashboardGroup.dashboard_layout, stage.stage_id, card)"
+            >
+              <task-details-on-list [card]="card" [hasBreadcrumbs]="false"></task-details-on-list>
+            </ion-item>
+            <ion-item
+              tappable
+              class="divider list-item todo-item"
+              *ngFor="let todo of card.todos_assigned"
+              (click)="openTask(dashboardGroup.dashboard_layout, stage.stage_id, card)"
+            >
+              <span>{{ todo.name }}</span>
+              <span class="card-attributes-dashboard">
+                <span>{{ todo.assigned }}</span>
+                <span *ngIf="todo.duedate">
+                  <ion-icon name="ios-calendar-outline"></ion-icon>
+                  {{ todo.duedate | date: 'MMM d' }}
+                </span>
+              </span>
+            </ion-item>
+          </ion-item-group>
+          <ion-item tappable class="load-more" *ngIf="stage.next_page"
+              (click)="loadMoreStageTasks({
+                dashboardGroup: dashboardGroup,
+                stageId: stage.stage_id,
+                page: stage.page,
+                userId: selectedUserId
+              })">
+            <span *ngIf="!loadingTasks">Load More</span>
+            <ion-spinner name="dots" *ngIf="loadingTasks"></ion-spinner>
+          </ion-item>
+        </ion-item-group>
+      </ion-item-group>
+    </ion-list>
+
+    <ng-template #noTasksComp>
+      <div class="empty-dashboard">
+        <div>No tasks assigned!</div>
+        <ion-icon name="menu"></ion-icon>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ion-infinite-scroll (ionInfinite)="loadMoreDashboardCards($event)" threshold="90%">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

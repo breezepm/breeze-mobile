@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>To-dos</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()" *ngIf="!isTodoListFormVisible">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+      <button ion-button color="primary" tappable (tap)="dontSaveTodoList()" *ngIf="isTodoListFormVisible">
+        <span>Cancel</span>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end *ngIf="!currentUser.observer">
+      <button ion-button icon-only (click)="showTodoListForm(listNameInput)" *ngIf="!isTodoListFormVisible">
+        <ion-icon name="add" color="primary"></ion-icon>
+      </button>
+      <button ion-button (click)="saveTodoList($event)" *ngIf="isTodoListFormVisible">
+        <span>Save</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+<ion-content padding-top margin-top>
+  <ion-list [hidden]="!isTodoListFormVisible">
+    <form novalidate [formGroup]="todoListForm" class="todo-list-form">
+      <ion-item>
+        <ion-textarea #listNameInput type="text" contenteditable autoresize placeholder="Add to-do list..."
+            formControlName="name"
+            (ionBlur)="saveTodoList($event)"
+            (keydown)="saveNew($event)">
+        </ion-textarea>
+      </ion-item>
+    </form>
+  </ion-list>
+
+  <ion-list *ngFor="let list of task.todo_lists; trackBy: trackById" class="todo-list-contain">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-textarea type="text" contenteditable autoresize
+            (focusin)="getPrevTodoListName(list.name)"
+            (ionBlur)="updateTodoListName(list)"
+            (keydown)="updateTaskName($event, list)"
+            [(ngModel)]="list.name">
+        </ion-textarea>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-left (click)="deleteTodoList(list)">
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item-sliding #slidingItem *ngFor="let todo of list.todos; trackBy: trackById" class="flex-fix">
+      <ion-item>
+        <button class="toggle-todo-status" clear ion-button item-left (click)="changeTodoStatus(todo)">
+          <ion-icon [name]="todo.done ? 'checkmark-circle-outline' : 'radio-button-off'"></ion-icon>
+        </button>
+        <ion-textarea
+          rows="1"
+          cols="1"
+          autoresize
+          type="text"
+          placeholder="Todo name"
+          [(ngModel)]="todo.name"
+          (focusin)="getPrevTodo(todo)"
+          (ionBlur)="updateTodo(todo, { isNameUpdate: true })"
+          (keydown)="saveTodoItem(todo, { isNameUpdate: true }, $event)">
+        </ion-textarea>
+
+        <ion-label class="todo-attributes" *ngIf="todo.duedate || todo.assigned">
+          <span>{{ todo.assigned }}</span>
+          <span *ngIf="todo.duedate">
+            <ion-icon name="ios-calendar-outline"></ion-icon>
+            {{ todo.duedate | date: 'MMM d' }}
+          </span>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" class="fix-margin" (click)="deleteTodo(todo)" *ngIf="!currentUser.observer">
+          Delete
+        </button>
+        <button ion-button color="secondary" (click)="assignTodo(todo, slidingItem)" *ngIf="!currentUser.observer">
+          Assign
+        </button>
+        <button ion-button color="primary" text-wrap (click)="setDueDate(todo, slidingItem)" *ngIf="!currentUser.observer">
+          Date
+        </button>
+        <button ion-button icon-only color="primary" *ngIf="!currentUser.observer && todo.duedate"
+            class="reset-date-button" (click)="resetDueDate(todo, slidingItem)">
+          <ion-icon name="ios-close-circle-outline"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <form novalidate [formGroup]="todoForm" class="todo-form">
+      <ion-item>
+        <ion-textarea
+          rows="1"
+          cols="1"
+          class="todo-textarea"
+          #todoTextArea
+          autoresize
+          type="text"
+          placeholder="Add todo..."
+          formControlName="name"
+          (keyup)="saveTodo($event, list.id, todoTextArea)"
+          (ionBlur)="saveTodo($event, list.id, todoTextArea)">
+        </ion-textarea>
+      </ion-item>
+    </form>
+  </ion-list>
+  <div class="bottom-spacer" [style.height.px]="keyboardHeight" *ngIf="platform.is('ios')"></div>
+
+  <ion-item hidden="true">
+    <ion-label color="primary">Due Date</ion-label>
+    <ion-datetime
+      #datePicker
+      tappable
+      displayFormat="DD/MMM/YYYY"
+      max="2099-12-31"
+      (ionCancel)="cancelDateSelection()"
+      (ionChange)="selectDate($event)"
+      [(ngModel)]="dates.duedate"
+    ></ion-datetime>
+  </ion-item>
+</ion-content>

@@ -1,0 +1,12 @@
+<ion-tabs #appTabs>
+  <ion-tab #appTab tabTitle="Tasks" tabIcon="list-box"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Projects" tabIcon="albums"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Add" tabIcon="add-circle"></ion-tab>
+  <ion-tab
+    [root]="tab4Root"
+    tabTitle="Activity"
+    tabIcon="pulse"
+    [tabBadge]="notificationsNumber$ | async"
+    tabBadgeStyle="danger"></ion-tab>
+  <ion-tab [root]="tab5Root" tabTitle="More" tabIcon="menu"></ion-tab>
+</ion-tabs>

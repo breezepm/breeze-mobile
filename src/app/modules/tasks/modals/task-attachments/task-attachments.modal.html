@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Files</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="selectMediaSource()" *ngIf="!currentUser.observer">
+        <ion-icon name="add" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+
+<ion-content margin-top padding-top>
+  <div class="attachments-section" *ngIf="task.attachments.length > 0">
+    <ion-list class="attachments-list">
+      <ion-item-sliding *ngFor="let attachment of task.attachments; trackBy: trackById"
+          (click)="openLink(attachment.url)">
+        <ion-item>
+          <ion-thumbnail item-start *ngIf="attachment.thumb && attachment.thumb_url">
+            <img [src]="attachment.thumb_url"/>
+          </ion-thumbnail>
+          <span text-wrap>{{ attachment.name }}</span>
+        </ion-item>
+        <ion-item-options side="right">
+          <button *ngIf="!currentUser.observer" ion-button color="danger" (click)="removeAttachment(attachment.id)">Remove</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

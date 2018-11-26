@@ -1,0 +1,47 @@
+<div *ngIf="card.cover">
+  <img [src]="card.cover" class="card-cover" alt='Cover'>
+</div>
+<div class="color-stripe" *ngIf="card.color" [ngStyle]="{ 'background-color': card.color }"></div>
+<span class="task-item">{{ card.name }}</span>
+<span class="card-attributes-dashboard">
+  <div *ngIf="!isArrayEmpty(card.users)" class="avatar-container">
+    <div class="task-team" *ngFor="let user of getAssignedUsers(card.users)">
+      <ion-avatar>
+        <br-user-avatar [avatar]="user.avatar" [background]="user.color" [initials]="user.initials">
+        </br-user-avatar>
+      </ion-avatar>
+    </div>
+  </div>
+  <span class="card-attribute card-status" [style.backgroundColor]="card.status_color">{{ card.status_name }}</span>
+  <span *ngIf="card.comments_count" class="card-attribute">
+    <ion-icon name="ios-chatboxes-outline"></ion-icon>
+    {{ card.comments_count }}
+  </span>
+  <span *ngIf="card.attachments_count" class="card-attribute">
+    <ion-icon name="ios-attach"></ion-icon>
+    {{ card.attachments_count }}
+  </span>
+  <span *ngIf="card.done_todos || card.todos_count" class="card-attribute">
+    <ion-icon name="ios-list-box-outline"></ion-icon>
+    {{ card.done_todos }}
+    <span>/</span>{{ card.todos_count }}
+  </span>
+  <span *ngIf="card.startdate || card.duedate" class="card-attribute">
+    <ion-icon name="ios-calendar-outline"></ion-icon>
+    {{ card.startdate | date: 'MMM d' }}
+    <span *ngIf="card.startdate">-</span>
+    {{ card.duedate | date: 'MMM d' }}
+  </span>
+  <span *ngIf="canSeeEstimates"
+        class="card-attribute"
+  >
+    <ion-icon name="ios-clock-outline"></ion-icon>
+    <span *ngIf="card.total_tracked">{{ card.total_tracked | hourMinFormat }}</span>
+    <span *ngIf="card.planned_time">/{{ card.planned_time | hourMinFormat }}</span>
+  </span>
+  <span class="tag-pill" [ngStyle]="{ 'background': tag.color }" *ngFor="let tag of card.tags_new">
+    {{ tag.name }}
+  </span>
+</span>
+
+<task-breadcrumbs *ngIf="hasBreadcrumbs" [card]="card"></task-breadcrumbs>

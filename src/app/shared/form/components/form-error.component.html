@@ -1,0 +1,5 @@
+<div class="error-message" *ngFor="let clientErrorMsg of clientErrorMessages">
+  {{ clientErrorMsg }}
+</div>
+<div class="error-message">{{ serverLoginErrorMsg$ | async }}</div>
+<div class="error-message">{{ serverSignupErrorMsg$ | async }}</div>

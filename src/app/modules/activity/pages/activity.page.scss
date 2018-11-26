@@ -1,0 +1,56 @@
+@import '../../../../sass/variables';
+
+page-activity {
+  .scroll-content {
+    margin-bottom: 0 !important;
+    margin-top: -1px !important;
+    padding-top: 0 !important;
+  }
+
+  .item-activity {
+    padding-bottom: 0;
+
+    p {
+      font-size: 12px;
+    }
+
+    &.date {
+      padding-right: 0;
+      text-align: right;
+    }
+
+    &.project-name {
+      padding-left: 0;
+      text-align: left;
+    }
+  }
+
+  .sticky-divider {
+    font-weight: bold;
+  }
+
+  p {
+    &.activity-msg {
+      margin-bottom: 15px;
+    }
+  }
+
+  .activity-msg,
+  .activity-footer {
+    margin-left: 35px;
+  }
+
+  ion-item-divider {
+    background-color: $divider-background !important;
+    border-bottom: .1rem solid $light-grey;
+    border-top: .1rem solid $light-grey;
+
+  }
+  div:first-child {
+    ion-item-group {
+      ion-item-divider {
+        border-top: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Comment</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="selectMediaSource()">
+        <ion-icon name="add" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+<ion-content>
+  <div class="attachments-section" *ngIf="comment.attachments.length > 0">
+    <ion-list-header>
+      Files
+    </ion-list-header>
+    <ion-list class="attachments-list">
+      <ion-item-sliding *ngFor="let attachment of comment.attachments; trackBy: trackById"
+          (click)="openLink(attachment.url)">
+        <ion-item>
+          <ion-thumbnail item-start *ngIf="attachment.thumb && attachment.thumb_url">
+            <img [src]="attachment.thumb_url">
+          </ion-thumbnail>
+          <span>{{ attachment.name }}</span>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="removeAttachment(attachment.id)">Remove</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <div class="comment-section">
+    <ion-item class="comment-input">
+      <ion-textarea
+        #textInput
+        type="text"
+        contenteditable="true"
+        placeholder="Write a comment"
+        [innerHtml]="comment.comment | safeHtml"
+        [mention]="taskUsers"
+        [viewHeight]="viewHeight"
+        (itemSelected)="addMentionIdToArray($event)"
+        [textareaValue]="comment.comment"
+        >
+      </ion-textarea>
+    </ion-item>
+  </div>
+  <div class="bottom-spacer" [style.height.px]="keyboardHeight" *ngIf="platform.is('ios')"></div>
+</ion-content>

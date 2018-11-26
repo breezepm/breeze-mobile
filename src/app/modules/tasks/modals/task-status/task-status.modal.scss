@@ -1,0 +1,14 @@
+modal-task-status {
+  .content {
+    background-color: $background-gray;
+    padding-top: 32px;
+  }
+
+  .scroll-content {
+    padding-top: 32px;
+  }
+
+  ion-header.header.header-ios {
+    border-bottom: 1px solid $grey-border;
+  }
+}

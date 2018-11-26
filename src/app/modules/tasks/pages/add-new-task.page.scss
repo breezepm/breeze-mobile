@@ -1,0 +1,28 @@
+@import '../../../../sass/variables.scss';
+@import '../../../../sass/mixins';
+
+page-add-new-task {
+  [floating] {
+    color: $grey;
+  }
+
+  .task-footer {
+    color: $grey;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .invalid-name, .invalid-stage, .invalid-project {
+    .item-inner {
+      @include form-control-invalid;
+    }
+  }
+}
+
+.add-new-task-select {
+  .popover-content {
+    left: 2px !important;
+    right: 2px !important;
+    width: auto !important;
+  }
+}

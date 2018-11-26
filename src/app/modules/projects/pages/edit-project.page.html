@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Edit project
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-loaded">
+  <ion-list padding-top margin-top>
+    <ion-item>
+      <ion-input
+        type="text"
+        placeholder="Project name"
+        (blur)="updateProject($event)"
+        (keyup)="updateProject($event)"
+        [(ngModel)]="projectName">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="workspaces">
+      <ion-label>Workspace</ion-label>
+      <ion-select [(ngModel)]="selectedWorkspaceId" multiple="false" (ionChange)="updateProject($event)">
+        <ion-option [value]="0">none</ion-option>
+        <ion-option *ngFor="let workspace of workspaces" [value]="workspace.id">{{ workspace.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-searchbar placeholder="Search user" (ionInput)="setFilters('email', $event)"></ion-searchbar>
+
+  <ng-container *ngIf="currentProject">
+    <ion-list class="user-list">
+      <ng-container *ngFor="let user of projectUsers | filterByProp: filters | filterByAssignment: 'assigned'">
+        <ion-item *ngIf="user != null">
+          <ion-icon item-left>
+            <br-user-avatar [avatar]="user.avatar_url" [background]="user.color" [initials]="user.initials"></br-user-avatar>
+          </ion-icon>
+          <ion-label>{{ user.name }}</ion-label>
+          <ion-checkbox (click)="onUserSelect(user)" [(ngModel)]="user.assigned" item-right color="blue"></ion-checkbox>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </ng-container>
+  
+</ion-content>

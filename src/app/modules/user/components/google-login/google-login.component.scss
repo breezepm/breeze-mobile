@@ -1,0 +1,10 @@
+@import '../../../../../sass/variables.scss';
+
+.google-button {
+  background-color: transparent;
+  border: 1px solid $white;
+  color: $white;
+  margin-top: 40px;
+  padding: 12px;
+  text-transform: none;
+}

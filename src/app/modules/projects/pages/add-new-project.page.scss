@@ -1,0 +1,54 @@
+@import '../../../../sass/variables.scss';
+
+add-new-project-page {
+  border-bottom: .55px solid $ghost;
+
+  ion-content {
+    h3 {
+      &.user-info {
+        line-height: 2rem;
+        color: color($colors, primary);
+      }
+    }
+
+    ion-icon {
+      &.avatar-placeholder {
+        font-size: 36px;
+      }
+    }
+    ion-avatar {
+      min-height: inherit !important;
+      min-width: inherit !important;
+    }
+  }
+
+  .list-ios form > .item-block:first-child {
+    border-top: .55px solid $ghost;
+  }
+
+  .list-md {
+    .item-input:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  form {
+    .text-input-md {
+      margin-left: 0;
+    }
+  }
+
+  .user-list {
+    .item-md {
+      ion-icon[item-left] + .item-inner {
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .item .item-inner:last-child {
+    border-bottom: 0;
+  }
+}
+
+

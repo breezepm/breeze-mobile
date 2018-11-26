@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"> </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openPopover($event)">
+        <ion-icon name="more" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="task != null">
+    <ion-item class="user">
+      <ion-icon item-left>
+        <br-user-avatar
+          [avatar]="task.user.avatar"
+          [background]="task.user.color"
+          [initials]="task.user.initials">
+        </br-user-avatar>
+      </ion-icon>
+      <span class="user-name" text-wrap>{{ task.user.name }}</span>
+      <span class="task-date" text-wrap> on {{ task.created_at | date : 'mediumDate' }}</span>
+      <span class="task-id" *ngIf="showTaskId$ | async">#{{ task.id }}</span>
+    </ion-item>
+    <form novalidate [formGroup]="taskNameForm">
+      <ion-item class="task-name">
+        <ion-textarea type="text" contenteditable autoresize [disabled]="currentUser.observer" placeholder="Task Name"
+                      formControlName="name" (keyup)="updateTaskName($event)" (ionBlur)="updateTaskName($event)"
+                      (focusin)="getPrevTaskName()" (keydown)="preventNextLine($event)">
+        </ion-textarea>
+      </ion-item>
+    </form>
+    <ion-item *ngIf="task.description" tappable class="task-description" [innerHTML]="task.description | safeHtml"
+        (click)="openTaskDescriptionModal()">
+    </ion-item>
+    <ion-item *ngIf="!task.description" class="task-description" tappable (click)="openTaskDescriptionModal()">
+      <span [ngClass]="{'disabled': currentUser.observer }">Tap to add a description</span>
+    </ion-item>
+
+    <ion-list *ngIf="!task.deleted_at" class="task-buttons-list">
+      <button ion-item icon-left class="tasks-icon" (click)="openTaskStageModal()" [disabled]="currentUser.observer">
+        <ion-icon name="apps"></ion-icon>
+        {{ task.stage.name }}
+      </button>
+
+      <button ion-item icon-left class="tasks-icon" (click)="openTaskStatusModal()" [disabled]="currentUser.observer">
+        <ion-icon name="ios-flag-outline"></ion-icon>
+        {{ taskStatus }}
+      </button>
+
+      <button ion-item icon-left class="tasks-icon" (click)="openTaskTodosModal()">
+        <ion-icon name="ios-list-box-outline"></ion-icon>
+        Todos
+        <ion-badge *ngIf="showTodosBadge" item-right>{{ todosBadgeText }}</ion-badge>
+      </button>
+
+      <button ion-item icon-left class="tasks-icon" (click)="openTaskUsersModal()" [disabled]="currentUser.observer">
+        <ion-icon name="ios-person-add-outline"></ion-icon>
+        Assign
+        <ion-note item-end *ngIf="assignedUsers.length > 0">
+          <div class="task-team" *ngFor="let user of assignedUsers">
+            <ion-icon item-right>
+              <br-user-avatar [avatar]="user.avatar" [background]="user.color" [initials]="user.initials">
+              </br-user-avatar>
+            </ion-icon>
+          </div>
+        </ion-note>
+      </button>
+
+      <button ion-item icon-left class="tasks-icon" (click)="openTaskDatesModal()" [disabled]="currentUser.observer">
+        <ion-icon name="ios-calendar-outline"></ion-icon>
+        Due Dates
+        <ion-note item-end>{{ startAndDueDate }}</ion-note>
+      </button>
+
+      <button ion-item icon-left class="tasks-icon" *ngIf="userCanSeeEstimates" (click)="openTaskTimeEntriesModal()">
+        <ion-icon name="ios-time-outline"></ion-icon>
+        Track Time
+        <ion-note item-end>
+          <span *ngIf="task.total_tracked">{{ task.total_tracked | hourMinFormat }}</span>
+          <span *ngIf="task.planned_time">/{{ task.planned_time | hourMinFormat }}</span>
+        </ion-note>
+      </button>
+
+      <button ion-item icon-left class="tasks-icon" (click)="openTaskAttachmentsModal()">
+        <ion-icon name="attach"></ion-icon>
+        Files
+        <ion-badge *ngIf="task.attachments_count > 0" item-right>{{ task.attachments_count }}</ion-badge>
+      </button>
+    </ion-list>
+
+    <div class="comment-wrapper" *ngIf="!task.deleted_at" margin-top margin-bottom>
+      <ion-item class="comment-input">
+        <ion-textarea #textInput type="text" autoresize placeholder="Write a comment"
+            (keyup)="saveComment($event)" [mention]="taskUsers" contenteditable="true"
+            (itemSelected)="addMentionIdToArray($event)" [innerHtml]="initialAddCommentHtml | safeHtml"
+            [viewHeight]="200" [isTaskPage]="true" [textareaValue]="" [taskPageSaveEvent]="taskPageSaveEvent">
+        </ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="comments-section" *ngIf="!task.deleted_at && comments.length > 0">
+      <ion-list class="comments-list">
+        <ion-item-sliding
+          *ngFor="let comment of comments; trackBy: trackById"
+          tappable
+          (tap)="openTaskCommentModal(comment)"
+        >
+          <ion-item>
+            <br-task-comment [comment]="comment"></br-task-comment>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (tap)="deleteComment(comment.id, $event)"
+                *ngIf="isCommentOwner(comment.user.id)">Delete</button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <div class="bottom-spacer" [style.height.px]="keyboardHeight" *ngIf="platform.is('ios')"></div>
+  </ng-container>
+</ion-content>

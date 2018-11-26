@@ -1,0 +1,27 @@
+@import '../../../../sass/variables.scss';
+
+search-result {
+  font-size: 15px;
+
+  .result-header {
+    color: $light-blue;
+    text-decoration: underline;
+  }
+
+  .date-and-footer {
+    color: $grey;
+    font-size: 13px;
+  }
+
+  .item {
+    margin-top: 5px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .result-body {
+    white-space: normal;
+  }
+}

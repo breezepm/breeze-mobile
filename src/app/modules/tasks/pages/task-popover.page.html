@@ -1,0 +1,6 @@
+<ion-list>
+  <button ion-item (click)="copyTaskLink()" detail-none>Copy task link</button>
+  <button ion-item (click)="deleteTask()" *ngIf="isDeleteButtonVisible" detail-none>
+    Archive task
+  </button>
+</ion-list>

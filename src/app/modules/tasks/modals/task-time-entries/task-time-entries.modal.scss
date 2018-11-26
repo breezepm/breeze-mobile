@@ -1,0 +1,37 @@
+@import '../../../../../sass/variables';
+
+modal-task-time-entries {
+  .content {
+    background-color: $background-gray;
+    padding-top: 32px;
+  }
+
+  .scroll-content {
+    padding-top: 32px;
+  }
+
+  .list-col {
+    margin-right: 15px;
+  }
+
+  .row {
+    flex-wrap: nowrap;
+  }
+
+  ion-col {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .list-md .item-input:last-child {
+    border-bottom: 0;
+  }
+
+  .list-header-md {
+    border-top: 0;
+  }
+
+  ion-header.header.header-ios {
+    border-bottom: 1px solid $grey-border;
+  }
+}

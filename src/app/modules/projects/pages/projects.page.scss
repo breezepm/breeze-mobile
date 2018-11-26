@@ -1,0 +1,24 @@
+@import '../../../../sass/variables.scss';
+
+page-projects {
+  ion-icon[name="star-outline"] {
+    visibility: hidden;
+  }
+
+  ion-list {
+    margin-bottom: 0 !important;
+  }
+
+  .list-md ion-item-group > .item-wrapper:last-child .item-inner {
+    border-bottom: 0;
+  }
+
+  ion-item-divider {
+    border-top: 1px solid $gainsboro;
+    border-bottom: 1px solid $gainsboro;
+  }
+
+  .item-md ion-icon[item-left] + .item-inner {
+    margin-left: 6px;
+  }
+}

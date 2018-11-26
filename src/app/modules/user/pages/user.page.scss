@@ -1,0 +1,204 @@
+@import '../../../../sass/variables';
+
+br-sign-in-page,
+br-sign-up-page {
+  .list-md[no-lines],
+  .list-ios[no-lines] {
+    .item,
+    .item-block {
+      background-color: transparent;
+      border-top: .5px solid $white;
+
+      &:last-child {
+        border-bottom: .5px solid $white;
+      }
+    }
+  }
+
+  .submit-button {
+    background-color: transparent;
+    border: 1px solid $white;
+    color: $white;
+    margin-top: 40px;
+    padding: 12px;
+    text-transform: uppercase;
+  }
+
+  button span {
+    color: $white;
+  }
+
+  .logo {
+    border: 0;
+    color: $white;
+    padding: 50px 0 10px;
+    text-align: center;
+
+    h1 {
+      color: $white;
+      font-family: $primary-font;
+      font-size: 36px;
+      font-weight: 100;
+    }
+
+    img {
+      width: 30%;
+    }
+  }
+
+  .login-inputs .item-inner{
+    padding: 0 !important;
+  }
+
+  ion-icon {
+    color: $white;
+    margin-right: 5px !important;
+    &.auth-input {
+      color: $white;
+    }
+  }
+
+  .signup-page {
+    .bar {
+      background: transparent none;
+      border-color: transparent;
+      color: $white;
+    }
+  }
+
+  .text-input {
+    line-height: 30px;
+    margin: 0;
+  }
+  .login-page {
+    background-image: url('./../assets/img/login-bg.jpg');
+    background-size: cover;
+
+    .list-outer {
+      height: 65%;
+      margin: 0 auto;
+      max-width: 500px;
+      padding: 30px 40px;
+    }
+  }
+
+  .text-input-ios {
+    color: $white;
+  }
+  form-error {
+    display: block;
+    min-height: 24px;
+
+    .error-message {
+      color: $yellow;
+    }
+  }
+  .item-md {
+    ion-icon[item-left] {
+      + .item-inner,
+      .item-input {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .custom-input {
+    color: $white;
+
+    ::-webkit-input-placeholder {
+      color: $light-white;
+      font-weight: $font-weight-light;
+    }
+  }
+
+  .sign-up {
+    button {
+      margin: 20px 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .bar {
+    .bar-light {
+      background: transparent;
+    }
+  }
+
+  .header-md {
+    &::after {
+      background: none;
+    }
+  }
+
+  .header-ios {
+    .toolbar-ios {
+      &:last-child {
+        .toolbar-background-ios {
+          border-width: 0;
+        }
+      }
+    }
+  }
+
+  .list-md {
+    .item-input {
+      &.ng-valid {
+        &.input-has-value {
+          &:not(.input-has-focus) {
+            &:last-child {
+              border-bottom-color: $white;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+
+      &.ng-invalid {
+        &.ng-touched {
+          &:not(.input-has-focus) {
+            &:last-child {
+              border-bottom-color: $white;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .item-md {
+    &.item-input {
+      &.ng-valid {
+        &.input-has-value {
+          &:not(.input-has-focus) {
+            .item-inner {
+              border-bottom-color: $white;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+
+      &.ng-invalid {
+        &.ng-touched {
+          &:not(.input-has-focus) {
+            .item-inner {
+              border-bottom-color: $white;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+br-sign-up-page .login-page {
+  .list-outer {
+    padding: 0 40px;
+  }
+
+  .logo {
+    padding: 50px 0 0;
+  }
+}

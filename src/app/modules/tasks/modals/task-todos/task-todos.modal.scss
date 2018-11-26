@@ -1,0 +1,160 @@
+@import '../../../../../sass/variables';
+
+modal-task-todos {
+  ion-navbar {
+    border-bottom: .55px solid rgba(0, 0, 0, .3);
+  }
+
+  ion-app.md [margin-top],
+  ion-app.md [margin-top] .scroll-content {
+    margin-top: 0 !important;
+  }
+
+  .content {
+    background-color: $background-gray;
+    padding-top: 32px;
+  }
+
+  .content-md {
+    margin-top: 0 !important;
+
+    .scroll-content {
+      padding-top: 22px !important;
+    }
+  }
+
+  .scroll-content {
+    margin-top: 64px !important;
+    padding-top: 32px !important;
+  }
+
+  .flex-fix {
+    ion-item .item-inner .input-wrapper {
+      flex-direction: column-reverse;
+    }
+
+    ion-label {
+      align-self: flex-end;
+      color: $grey;
+      font-size: .7em;
+      margin-right: 24px;
+      max-width: 100%;
+    }
+  }
+
+  .fix-margin {
+    margin-left: 16px !important;
+  }
+
+  .todo-list-form {
+    .item-block .item-inner {
+      border-bottom: 0;
+    }
+  }
+
+  .label-ios + ion-input .text-input, .label-ios + ion-textarea .text-input, .label-ios + .input + .cloned-input {
+    margin-left: 0;
+  }
+
+  .list-ios > .item-block:first-child {
+      border-top: .55px solid $ghost;
+  }
+
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .todo-list-form{
+    ion-item {
+      border-bottom: .55px solid $ghost;
+      border-top: .55px solid $ghost;
+    }
+  }
+
+  button {
+    &.toggle-todo-status {
+      z-index: 10;
+      div.button-effect {
+        display: none;
+      }
+    }
+
+    .item-inner {
+      border-bottom: 0 !important;
+    }
+  }
+
+  .item-button.toggle-todo-status {
+    font-size: 2rem !important;
+    height: 43px !important;
+    margin: 0;
+    padding: 0 1rem 0 0;
+  }
+
+  .todo-lists-title {
+    ion-item.item-md {
+      div.item-inner {
+        border-bottom: 1px solid $gainsboro !important;
+        border-bottom-color: $light-grey !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  .todo-list-contain {
+    ion-item-sliding:first-child ion-item{
+      border-top: .55px solid $ghost;
+      margin-left: 0;
+      padding-left: 16px;
+    }
+
+    form ion-item {
+      margin-left: 0;
+      padding-left: 16px;
+    }
+
+    ion-item {
+      border-bottom: .55px solid $ghost;
+      margin-left: 16px;
+      padding-left: 0;
+
+      .item-inner {
+        border-bottom: 0 !important;
+      }
+    }
+
+    .todo-textarea {
+      background: transparent;
+      border: 0;
+      display: block;
+      margin: 11px 8px 11px 0;
+      padding: 0;
+      resize: none;
+      width: calc(100% - 8px);
+    }
+  }
+
+  form.todo-list-form {
+    border-bottom: 1px solid $gainsboro;
+  }
+
+  ion-textarea textarea.text-input {
+    min-height: 35px;
+    resize: auto !important;
+  }
+
+  .bottom-spacer {
+    height: 0;
+  }
+
+  .scroll-content {
+    margin-top: 50px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .reset-date-button {
+    margin-left: 2px !important;
+  }
+}

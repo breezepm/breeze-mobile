@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Assign</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+
+<ion-content margin-top padding-top>
+  <ion-list class="user-list">
+    <ng-container *ngFor="let user of taskUsers;trackBy: trackById">
+      <ion-item  *ngIf="user != null">
+        <ion-icon item-left>
+          <br-user-avatar [avatar]="user.avatar" [background]="user.color" [initials]="user.initials"></br-user-avatar>
+        </ion-icon>
+        <ion-label>{{ user.name }}</ion-label>
+        <ion-checkbox (click)="onUserSelect(user)" [(ngModel)]="user.assigned" item-right color="blue"></ion-checkbox>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

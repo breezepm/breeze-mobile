@@ -1,0 +1,141 @@
+@import '../../../../sass/variables';
+
+page-task {
+  .comment-input {
+    contain: none;
+    overflow: visible;
+  }
+
+  ion-header.header.header-ios {
+    border-bottom: 1px solid $grey-border;
+  }
+
+  .content {
+    background-color: $background-gray;
+
+    ion-note {
+      margin: 0 !important;
+    }
+
+    ion-item.item {
+      &.user,
+      &.task-name,
+      &.comment-input,
+      &.task-description {
+        border-bottom: .1rem solid $ghost;
+
+        div.item-inner {
+          border-bottom: 0; // overrides Ionic
+          box-shadow: none !important; // Didn't work without !important
+        }
+      }
+
+      &.user {
+        background-color: transparent;
+        padding-left: 10px;
+        
+        .task-id {
+          background-color: $light-grey;
+          font-size: 12px;
+          padding: 3px;
+        }
+      }
+
+      &.task-name,
+      &.comment-input,
+      &.task-description {
+        display: block;
+        font-size: 1.5rem;
+        padding: 10px;
+      }
+
+      &.task-description {
+        background-color: transparent;
+      }
+
+      &.task-name {
+        padding-left: 10px;
+        .item-inner {
+          margin: 0;
+        }
+
+        textarea {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          &.text-input-md {
+            margin-left: 0;
+          }
+        }
+      }
+
+    }
+
+    span {
+      &.user-name,
+      &.task-date {
+        line-height: 2.3rem;
+        font-size: 1.4rem;
+      }
+
+    }
+
+    ion-list.task-buttons-list {
+      margin-bottom: 1.0rem;
+
+
+      button.tasks-icon {
+        ion-icon {
+          position: relative;
+          top: .2rem;
+          width: 3rem;
+        }
+
+        div.task-team {
+          display: inline-block;
+          margin-left: -15px;
+          vertical-align: bottom;
+
+          ion-icon {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    ion-list {
+      &.comments-list {
+        margin-bottom: 0;
+        padding-bottom: 32px;
+
+        &.list-ios {
+          border-top: 0.55px solid $ghost;
+        }
+
+        &.list-md {
+          &:last-child {
+            border-bottom: .1rem solid $ghost;
+          }
+        }
+      }
+    }
+
+    .comment-wrapper {
+      border-top: .1rem solid $ghost;
+    }
+  }
+
+  .disabled {
+    color: $grey;
+  }
+
+  // workaround for placeholders in contenteditable HTML elements
+  [contenteditable=true]:empty:before {
+    content: attr(placeholder);
+  }
+
+  .bottom-spacer {
+    background-color: $background-gray;
+    height: 0;
+  }
+}

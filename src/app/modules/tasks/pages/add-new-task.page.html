@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Add new task
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-loaded">
+  <form [formGroup]="taskForm" (submit)="addTask()">
+    <ion-list padding-top>
+      <ion-item [ngClass]="{ 'invalid-name': taskForm.get('name').errors && isFormSent }">
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input type="text" formControlName="description"></ion-input>
+      </ion-item>
+      <ion-item [ngClass]="{ 'invalid-project': taskForm.get('projectId').errors && isFormSent }">
+        <ion-label>Project</ion-label>
+        <ion-select
+          [selectOptions]="selectPopoverOpts"
+          interface="popover"
+          (ionChange)="updateProject($event)"
+          formControlName="projectId"
+        >
+          <ion-option
+            *ngFor="let project of projects"
+            [value]="project.id"
+          >
+            {{ project.name }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="swimlanes && swimlanes.length">
+        <ion-label>Swimlane</ion-label>
+        <ion-select
+          [selectOptions]="selectPopoverOpts"
+          interface="popover"
+          formControlName="swimlaneId"
+        >
+          <ion-option
+            value=""
+            selected="true"
+          >
+            None
+          </ion-option>
+          <ion-option
+            *ngFor="let swimlane of swimlanes"
+            [value]="swimlane.id"
+          >
+            {{ swimlane.name }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item [ngClass]="{ 'invalid-stage': taskForm.get('stageId').errors && isFormSent }">
+        <ion-label>List</ion-label>
+        <ion-select
+          [selectOptions]="selectPopoverOpts"
+          interface="popover"
+          formControlName="stageId"
+        >
+          <ion-option
+            *ngFor="let stage of stages"
+            [value]="stage.id"
+          >
+            {{ stage.name }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button full type="submit">Add task</button>
+  </form>
+
+  <ion-list padding-top>
+    <ion-list-header>
+      Recently added tasks
+    </ion-list-header>
+    <ion-item tappable *ngFor="let task of lastTasks" (click)="openTask(task.id, task.project_id)">
+      <div>{{ task.name }}</div>
+      <div class="task-footer" [innerHTML]="task.footer"></div>
+    </ion-item>
+  </ion-list>
+</ion-content>

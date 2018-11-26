@@ -1,0 +1,11 @@
+page-tasks-popover {
+  ion-select {
+    max-width: 100%;
+    padding: 0 8px 0 0 !important; 
+  }
+
+  .select-ios,
+  .select-md {
+    padding: 0;
+  }
+}

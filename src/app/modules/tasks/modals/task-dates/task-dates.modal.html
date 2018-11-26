@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Due Dates</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+
+<ion-content margin-top padding-top>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <ion-row>
+          <ion-col col-10 (tap)="openStart()">
+            <ion-row>
+              <ion-col col-5 text-left>
+                Start date
+              </ion-col>
+              <ion-col col-7 text-left>
+                {{ printStartdateOrInfo() }}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-2 text-center align-self-center tappable (tap)="resetDate('start')">
+            <ion-icon name="ios-close-circle-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-row>
+          <ion-col col-10 (tap)="openEnd()">
+            <ion-row>
+              <ion-col col-5 text-left>
+                Due date
+              </ion-col>
+              <ion-col col-7 text-left>
+                {{ printEnddateOrInfo() }}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-2 text-center align-self-center tappable (tap)="resetDate('due')">
+            <ion-icon name="ios-close-circle-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+    </ion-item>
+
+    <ion-item no-lines hidden="true">
+      <ion-label color="primary">Start Date</ion-label>
+      <ion-datetime
+        #startDate
+        tappable
+        (click)="openStart()"
+        displayFormat="DD/MMM/YYYY"
+        (ionCancel)="clearDateModel('startdate')"
+        [(ngModel)]="dates.startdate"
+        [max]="maxDate"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item no-lines hidden="true">
+      <ion-label color="primary">Due Date</ion-label>
+      <ion-datetime
+        #endDate
+        tappable
+        (click)="openEnd()"
+        displayFormat="DD/MMM/YYYY"
+        (ionCancel)="clearDateModel('duedate')"
+        [(ngModel)]="dates.duedate"
+        [max]="maxDate"
+      ></ion-datetime>
+    </ion-item>
+  </ion-list>
+</ion-content>

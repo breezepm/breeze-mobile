@@ -1,0 +1,85 @@
+@import '../../../../../sass/variables';
+
+br-task-comment {
+  .task-comment-container {
+    div {
+      &.user-section {
+        align-items: baseline;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        min-height: 25px;
+        padding: 2px 4px;
+      }
+
+      ion-avatar {
+        align-self: center;
+        padding-right: .6rem;
+      }
+
+      &.user-name,
+      &.comment-date {
+        padding-right: .2rem;
+      }
+    }
+
+    div {
+      &.user-name,
+      &.comment-date {
+        font-size: 1.4rem;
+        line-height: 2rem;
+      }
+
+      &.user-name {
+        margin-top: 3px;
+        max-width: 65%;
+        padding-right: .6rem;
+      }
+
+      &.comment-date {
+        color: $aluminium;
+        font-size: 1.2rem;
+      }
+    }
+
+    span {
+      &.attachment-url {
+        color: $pure-blue;
+        font-size: 1.4rem;
+        padding-left: 4px;
+      }
+    }
+
+    p {
+      &.comment-text {
+        color: $black;
+        margin: 0;
+        padding: 2px 4px;
+
+        p {
+          color: $black;
+          margin: 0;
+        }
+      }
+    }
+
+    img.user-avatar,
+    p.no-avatar {
+      height: 25px;
+      width: 25px
+    }
+
+    ion-avatar {
+      min-height: 25px;
+      min-width: 25px;
+    }
+
+    p {
+      &.no-avatar {
+        line-height: 25px;
+      }
+    }
+
+  }
+
+}

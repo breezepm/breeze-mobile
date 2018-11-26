@@ -1,0 +1,199 @@
+@import '../../../../theme/variables';
+
+page-project {
+
+  ion-card.activated {
+    background-color: $list-ios-activated-background-color;
+  }
+
+  .swimlane-name {
+    border-bottom: .55px solid $ghost;
+  }
+
+  .invisible {
+    display: none;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+
+  .card-full-width {
+    margin: 10px 0;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .transparent-background {
+    background-color: transparent;
+  }
+
+  .cloudy {
+    background-color: map-get($colors, cloudy);
+  }
+
+  .cloudy-dark {
+    background-color: map-get($colors, cloudy-dark);
+  }
+
+  .dragula-bag {
+    min-height: 20px;
+  }
+
+  // Dragula Styles Start:
+  .gu-mirror {
+    background-color: $light-grey;
+    margin: 0 !important;
+    opacity: 0.7;
+    position: fixed !important;
+    z-index: 9999 !important;
+  }
+
+  .gu-hide {
+    visibility: hidden;
+    will-change: visibility;
+   }
+
+  .gu-unselectable {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+
+  .gu-transit {
+    opacity: 0.2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+  }
+  // Dragula Styles End.
+
+  .gu-mirror {
+
+    br-user-avatar {
+
+      img {
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .no-borders.item-ios.item-block {
+    .item-inner {
+      border-bottom: 0;
+    }
+  }
+
+  .button-right {
+    float: right;
+  }
+
+  .stage-header-container {
+    height: 10%;
+    padding-left: 10px;
+  }
+
+  .slide-zoom {
+    height: 100%;
+  }
+
+  .scroll-container {
+
+    &.phone {
+      height: 100%;
+      overflow-y: scroll;
+      padding-bottom: 40px;
+      position: relative;
+    }
+
+    &.tablet {
+      bottom: 0;
+      left: 0;
+      overflow-y: scroll;
+      padding-bottom: 10px;
+      position: absolute;
+      top: 50px;
+      z-index: 1;
+    }
+  }
+
+  .scroll {
+    overflow-x: scroll;
+
+    .swiper-container {
+      overflow: visible;
+    }
+  }
+
+  .grey-background {
+    background-color: $background-gray;
+  }
+
+  .const-width {
+    width: 250px !important;
+  }
+
+  .swimlane {
+    position: relative;
+    width: auto;
+  }
+
+  .stages-container {
+    white-space: nowrap;
+    width: auto;
+  }
+
+  .stage {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+    vertical-align: top;
+    width: 250px;
+  }
+
+  .scroll-content {
+    overflow-x: scroll;
+  }
+
+  .tablet-header {
+    margin-left: -5px;
+    margin-right: -5px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .user-avatar {
+    border-radius: 50%;
+  }
+
+  .swimlane-header {
+    background-color: transparent;
+    margin-left: -5px;
+
+    &.item-ios.item-block {
+      .item-inner {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .tablet-container {
+    .scroll-content {
+      overflow-y: hidden;
+    }
+  }
+
+  .scroll-content {
+    padding-bottom: 0 !important;
+  }
+
+  .stage-name input {
+    background-color: $stage-name-background-color !important;
+  }
+  
+  .stage-name input:disabled {
+    opacity: 1 !important;
+  }
+}

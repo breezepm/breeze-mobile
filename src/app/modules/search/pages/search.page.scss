@@ -1,0 +1,15 @@
+@import '../../../../sass/variables.scss';
+
+page-search {
+  .custom-spinner {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    transform: scale(1.5);
+  }
+
+  .grey-text {
+    color: $grey;
+  }
+}

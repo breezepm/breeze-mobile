@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Search
+    </ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    (search)="search()"
+    [(ngModel)]="searchString"
+    (ionClear)="onClear($event)">
+  >
+  </ion-searchbar>
+  <span class="custom-spinner" *ngIf="isSearchPending">
+    <ion-spinner name="circles"></ion-spinner>
+  </span>
+  <ion-list>
+    <ion-item *ngFor="let searchResult of searchResults" tappable>
+      <search-result (click)="openTask(searchResult.card_id, searchResult.project.id)" [item]="searchResult" tappable>
+      </search-result>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="loadMoreSearchResults($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ng-container *ngIf="isSearchResultEmpty$ | async">
+      <ion-row>
+        <ion-col col-12 text-center class="grey-text">
+          <h3>No results found</h3>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-list>
+</ion-content>

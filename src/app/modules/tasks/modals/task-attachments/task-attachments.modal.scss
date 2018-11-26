@@ -1,0 +1,25 @@
+@import '../../../../../sass/variables';
+
+modal-task-attachments {
+  .content {
+    background-color: $background-gray;
+  }
+
+  .attachments-list.list-ios {
+    border-top: .55px solid $ghost;
+  }
+
+  .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+    height: auto;
+    max-height: 80px;
+    max-width: 80px;
+    width: auto;
+  }
+
+  .item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img {
+    height: auto;
+    max-height: 56px;
+    max-width: 56px;
+    width: auto;
+  }
+}

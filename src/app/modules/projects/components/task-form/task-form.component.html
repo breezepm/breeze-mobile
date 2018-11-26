@@ -1,0 +1,20 @@
+<button ion-button full icon-only class="cloudy show-field" (click)="showNewTaskField()"
+    *ngIf="!isUserObserver && !isFieldVisible">
+  <ion-icon name="add" color="primary"></ion-icon>
+</button>
+
+<form novalidate *ngIf="isFieldVisible" (submit)="addNewTask()" [formGroup]="taskForm">
+  <ion-item no-lines>
+    <ion-textarea
+      autoresize
+      formControlName="taskName"
+      (ionBlur)="addNewTask($event)"
+      (keyup)="addNewTask($event)"
+      placeholder="Create a task"
+      class="task-name"
+    >
+    </ion-textarea>
+  </ion-item>
+  <!-- this input is necessary for Android, otherwise the (submit) wont work -->
+  <input type="submit" class="invisible"/>
+</form>

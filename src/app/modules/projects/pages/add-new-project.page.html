@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      New project
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="createProject($event)">
+        <span ion-text color="primary">Create</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-loaded">
+  <ion-list padding-top margin-top>
+    <form [formGroup]="form">
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Project name"
+          formControlName="projectName"
+          (keyup)="createProject($event)"
+        ></ion-input>
+      </ion-item>
+    </form>
+
+    <ion-item *ngIf="workspaces">
+      <ion-label>Workspace</ion-label>
+      <ion-select [(ngModel)]="selectedWorkspace" multiple="false">
+        <ion-option value="">none</ion-option>
+        <ion-option *ngFor="let workspace of workspaces" [value]="workspace.id">{{ workspace.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-searchbar placeholder="Search user" (ionInput)="setFilters('search_name', $event)"></ion-searchbar>
+
+  <ion-list class="user-list">
+    <ng-container *ngFor="let user of users | filterByProp: filters">
+      <ion-item  *ngIf="user != null">
+        <ion-icon item-left>
+          <br-user-avatar [avatar]="user.avatar_url" [background]="user.color" [initials]="user.initials"></br-user-avatar>
+        </ion-icon>
+        <ion-label>{{ user.name }}</ion-label>
+        <ion-checkbox (click)="onUserSelect(user)" [(ngModel)]="user.selected" item-right color="blue"></ion-checkbox>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

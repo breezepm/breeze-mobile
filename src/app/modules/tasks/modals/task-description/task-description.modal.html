@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Description</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-textarea
+      #textInput
+      type="text"
+      contenteditable
+      placeholder="Add a description"
+      [mention]="taskUsers"
+      (itemSelected)="addMentionIdToArray($event)"
+      [viewHeight]="viewHeight"
+      [innerHtml]="task.description | safeHtml"
+      [textareaValue]="initialDescription"
+      >
+    </ion-textarea>
+  </ion-item>
+  <div class="bottom-spacer" [style.height.px]="keyboardHeight" *ngIf="platform.is('ios')"></div>
+</ion-content>

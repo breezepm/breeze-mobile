@@ -1,0 +1,203 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <form *ngIf="!isTablet" [formGroup]="stageForm" novalidate (submit)="updateStageName()" class="stage-name">
+        <ion-input
+          type="text"
+          text-center
+          formControlName="stageName"
+          (focusout)="updateStageName($event)"
+          (keyup)="updateStageName($event)"
+        >
+        </ion-input>
+        <!-- this input is necessary for Android, otherwise the (submit) wont work -->
+        <input type="submit" class="invisible"/>
+      </form>
+
+      <div *ngIf="isTablet" text-center [innerText]="headerTitle"></div>
+
+    </ion-title>
+
+      <ion-buttons end *ngIf="isTablet && !currentUser.observer">
+        <button ion-button icon-only (click)="openPopoverForProject($event)">
+          <ion-icon name="more" color="primary"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-buttons end *ngIf="!isTablet && !currentUser.observer">
+        <button ion-button icon-only (click)="openPopover($event)">
+          <ion-icon name="more" color="primary"></ion-icon>
+        </button>
+      </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-loaded" [ngClass]="{ 'tablet-container' : isTablet }">
+
+  <ng-container *ngIf="!isTablet">
+    <ion-slides pager (ionSlideDidChange)="slideChanged()" (swipe)="swipeSlides($event)" *ngIf="project != null">
+
+        <ion-slide class="cloudy-dark" [id]='stageIndex'
+            *ngFor="let stage of firstSwimlane.stages; let stageIndex = index; trackBy: trackById">
+          <div class="scroll-container phone">
+            <ion-item class="transparent-background" no-lines
+                *ngFor="let swimlane of project.swimlanes; trackBy: trackById">
+              <div text-left *ngIf="swimlane.id !== 0" class="swimlane-name">{{ swimlane.name }}</div>
+              <br-task-form
+                [swimlaneId]="swimlane.id"
+                [stageId]="stage.id"
+                [isUserObserver]="isUserObserver"
+                [isExtClose]="isAddTaskClosed"
+                (focusin)="lockSwipes()"
+                (onFocusOut)="unlockSwipes()"
+                (onSubmit)="addNewTask($event)">
+              </br-task-form>
+
+              <div
+                *ngIf="!currentUser.observer"
+                class="dragula-bag"
+                [dragula]="bagName"
+                [id]="'st-' + stage.id + '-sw-' + swimlane.id"
+                [dragulaModel]="swimlane.stages[stageIndex].cards"
+              >
+                <ng-container *ngIf="plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                      (tap)="openTask(card.id, stage.id, swimlane.id)"
+                      *ngFor="let card of swimlane.stages[stageIndex].cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+                <ng-container *ngIf="!plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                      (click)="openTask(card.id, stage.id, swimlane.id)"
+                      *ngFor="let card of swimlane.stages[stageIndex].cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+              </div>
+              <div *ngIf="currentUser.observer">
+                <ng-container *ngIf="plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                          (tap)="openTask(card.id, stage.id, swimlane.id)"
+                          *ngFor="let card of swimlane.stages[stageIndex].cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+                <ng-container *ngIf="!plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                            (click)="openTask(card.id, stage.id, swimlane.id)"
+                            *ngFor="let card of swimlane.stages[stageIndex].cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+              </div>
+              <div text-center *ngIf="showLoadMoreButton(swimlane, stageIndex)">
+                <button ion-button clear color="primary" *ngIf="!isLoading(swimlane.stages[stageIndex].id, swimlane.id)"
+                    (click)="loadMoreTasks(swimlane.stages[stageIndex], swimlane.id)">
+                  Load More
+                </button>
+                <ion-spinner name="dots" *ngIf="isLoading(swimlane.stages[stageIndex].id, swimlane.id)"></ion-spinner>
+              </div>
+            </ion-item>
+          </div>
+        </ion-slide>
+
+    </ion-slides>
+  </ng-container>
+
+  <ng-container *ngIf="isTablet">
+    <div *ngFor="let swimlane of swimlanes; let swimlineIndex = index" class="swimlane">
+        <div class="stages-container">
+          <div *ngFor="let stage of swimlane.stages; let stageIndex = index; trackBy: trackById" class="stage">
+            <ng-container *ngIf="swimlineIndex === 0">
+              <ion-grid class="stage-header-container tablet-header">
+                <ion-row>
+                  <ion-col col-9>
+                    <form [formGroup]="formsArray['listNameForm' + stageIndex]" novalidate
+                      (submit)="updateOneStageName('listNameForm' + stageIndex, stageIndex)">
+                      <ion-input type="text" text-left formControlName="listName"
+                       (focusout)="updateOneStageName('listNameForm' + stageIndex, stageIndex)">
+                      </ion-input>
+                      <input type="submit" class="invisible"/>
+                    </form>
+                  </ion-col>
+                  <ion-col col-3>
+                    <button class="button-right" *ngIf="!currentUser.observer" ion-button icon-only clear (click)="openPopoverForStage($event, stageIndex)">
+                      <ion-icon name="more" color="primary"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="stages-container">
+      <div class="scroll-container tablet">
+        <div *ngFor="let swimlane of swimlanes; let swimlineIndex = index" class="swimline">
+          <ng-container *ngIf="swimlineIndex !== 0">
+            <ion-item class="swimlane-header">{{swimlane.name}}</ion-item>
+          </ng-container>
+            <div *ngFor="let stage of swimlane.stages; let stageIndex = index; trackBy: trackById" class="stage" [id]='stageIndex'>
+              <div
+                *ngIf="!currentUser.observer"
+                class="dragula-bag"
+                [dragula]="bagName"
+                [id]="'st-' + stage.id + '-sw-' + swimlane.id"
+                [dragulaModel]="stage.cards"
+              >
+                <ng-container *ngIf="plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                      (tap)="openTask(card.id, stage.id, swimlane.id)"
+                      *ngFor="let card of stage.cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+                <ng-container *ngIf="!plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                      (click)="openTask(card.id, stage.id, swimlane.id)"
+                      *ngFor="let card of stage.cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+              </div>
+              <div *ngIf="currentUser.observer">
+                <ng-container *ngIf="plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                            (tap)="openTask(card.id, stage.id, swimlane.id)"
+                            *ngFor="let card of stage.cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+                <ng-container *ngIf="!plt.is('ios')">
+                  <ion-card tappable class="card-full-width" [id]="card.id"
+                            (click)="openTask(card.id, stage.id, swimlane.id)"
+                            *ngFor="let card of stage.cards; trackBy: trackById">
+                    <task-details-on-kanban-view [card]="card"></task-details-on-kanban-view>
+                  </ion-card>
+                </ng-container>
+              </div>
+              <br-task-form
+                [swimlaneId]="swimlane.id"
+                [stageId]="stage.id"
+                [isUserObserver]="isUserObserver"
+                [isExtClose]="isAddTaskClosed"
+                [addLast]="true"
+                (focusin)="openAddTask()"
+                (onFocusOut)="unlockSwipes()"
+                (onSubmit)="addNewTask($event)">
+              </br-task-form>
+              <div text-center *ngIf="showLoadMoreButton(swimlane, stageIndex)">
+                <button ion-button clear color="primary" *ngIf="!isLoading(swimlane.stages[stageIndex].id, swimlane.id)"
+                    (click)="loadMoreTasks(swimlane.stages[stageIndex], swimlane.id)">
+                  Load More
+                </button>
+                <ion-spinner name="dots" *ngIf="isLoading(swimlane.stages[stageIndex].id, swimlane.id)"></ion-spinner>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

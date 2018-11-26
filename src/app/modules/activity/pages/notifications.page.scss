@@ -1,0 +1,76 @@
+@import '../../../../sass/variables';
+
+page-notifications {
+  .grey-text {
+    color: $grey;
+  }
+
+  .text-col {
+    margin-left: 37px;
+  }
+
+  .list-md {
+    margin-bottom: 0;
+  }
+
+  .list-ios {
+    margin-bottom: 0;
+  }
+
+  .scroll-content {
+    margin-bottom: 0 !important;
+    margin-top: -1px !important;
+    padding-top: 0 !important;
+  }
+
+  .marked-unread {
+    background-color: $marked-notification-background;
+  
+    .activity-msg {
+      color: $marked-notification-color;
+    }
+
+    .item-notification {
+      p {
+        color: $grey;
+      }
+    }
+  }
+
+  .item-notification {
+    padding-bottom: 0;
+
+    p {
+      color: $dark-grey;
+      font-size: 12px;
+    }
+
+    &.date {
+      padding-right: 0;
+      text-align: right;
+    }
+
+    &.project-name {
+      padding-left: 0;
+      text-align: left;
+    }
+  }
+
+  p {
+    &.notification-creator {
+      margin-bottom: 5px;
+    }
+
+    &.description {
+      margin-bottom: 5px;
+    }
+  }
+
+  div:first-child {
+    ion-item-group {
+      ion-item-divider {
+        border-top: none;
+      }
+    }
+  }
+}

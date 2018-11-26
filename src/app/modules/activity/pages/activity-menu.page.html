@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="subpage">
+      <ion-segment-button value="notifications" (click)="setRootPage('NotificationsPage')">
+        Notifications
+        <ion-badge *ngIf="showBadge$ | async">{{ notificationsNumber$ | async }}</ion-badge>
+      </ion-segment-button>
+      <ion-segment-button value="activities" (click)="setRootPage('ActivityPage')">
+        Activities
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-nav [root]="root" class="activity-menu"></ion-nav>
+</ion-content>

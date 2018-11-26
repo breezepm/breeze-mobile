@@ -1,0 +1,15 @@
+@import '../../../../sass/variables.scss';
+
+task-breadcrumbs {
+  .breadcrumbs {
+    clear: both;
+    color: $grey;
+    display: block;
+    font-size: 12px;
+    margin-top: 10px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

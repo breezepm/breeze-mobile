@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>List</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+<ion-content margin-top padding-top>
+  <ion-list radio-group>
+    <ion-item *ngFor="let stage of stages">
+      <ion-label>{{ stage.name }}</ion-label>
+      <ion-radio [checked]="stage.id === selectedStageId" (ionSelect)="selectStage(stage.id)">
+      </ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

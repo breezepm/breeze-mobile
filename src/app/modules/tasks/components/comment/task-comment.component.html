@@ -1,0 +1,20 @@
+<div class="task-comment-container">
+  <div class="user-section">
+    <ion-avatar>
+      <br-user-avatar
+        [avatar]="comment.user.avatar"
+        [background]="comment.user.color"
+        [initials]="comment.user.initials">
+      </br-user-avatar>
+    </ion-avatar>
+    <div class="user-name" text-wrap>{{ comment.user.name + ", " }}</div>
+    <div class="comment-date" text-wrap>{{ timeAgo }}</div>
+  </div>
+  <p class="comment-text" [innerHTML]="comment.comment | safeHtml " text-wrap></p>
+
+  <div class="attachments-section" *ngIf="comment.attachments != null">
+    <div *ngFor="let attachment of comment.attachments; trackBy: trackById">
+      <span class="attachment-url" (click)="openLink(attachment.url)">{{ attachment.name }}</span>
+    </div>
+  </div>
+</div>

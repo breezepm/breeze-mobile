@@ -1,0 +1,33 @@
+@import '../../../../../sass/variables';
+
+modal-task-description {
+  .item-textarea {
+    height: auto !important;
+  }
+
+  [contenteditable] {
+    height: auto !important;
+    padding: 1.5rem 0;
+
+    p {
+      color: $black;
+      font-size: 1.7rem;
+      margin: 0;
+    }
+  }
+
+  .item-ios.item-block .item-inner, .item-md.item-block .item-inner {
+    border-bottom: 0;
+  }
+
+  ion-textarea {
+    height: auto;
+    min-height: 647px;
+    overflow-y: hidden !important;
+    resize: vertical;
+  }
+
+  .bottom-spacer {
+    height: 0;
+  }
+}

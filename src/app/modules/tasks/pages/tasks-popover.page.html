@@ -1,0 +1,16 @@
+  <ion-list>
+    <button ion-item (click)="sortByDueDate()">Sort by due date</button>
+    <button ion-item (click)="sortByProjects()">Sort by projects</button>
+    <ion-item>
+      <ion-select
+        interface="alert"
+        [(ngModel)]="selectedUserId"
+        multiple="false"
+        placeholder="Select user"
+        (ionChange)="selectTaskUser()"
+        (ionBlur)="isUserSelected()"
+        (ionCancel)="closeSelect()">
+        <ion-option *ngFor="let user of dashboardUsers" [value]="user.id">{{ user.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>

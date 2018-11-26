@@ -1,0 +1,67 @@
+@import '../../../../../sass/variables';
+
+modal-task-comment {
+
+  .comment-section {
+    height: auto !important;
+  }
+
+  .content {
+    background-color: $background-gray;
+  }
+
+  .attachments-list.list-ios {
+    border-top: .55px solid $ghost;
+  }
+
+  [contenteditable] {
+    padding: 1.5rem 0;
+  }
+
+  .comment-section {
+
+    .comment-input {
+      height: 100%;
+
+      &.item-ios {
+        border-top: 1px solid $ghost;
+        margin-top: -1px;
+      }
+
+      p {
+        color: $black;
+        font-size: 1.7rem;
+        margin: 0;
+      }
+    }
+    .item-ios.item-block .item-inner, .item-md.item-block .item-inner {
+      border-bottom: 0;
+    }
+  }
+
+  .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+    height: auto;
+    max-height: 80px;
+    max-width: 80px;
+    width: auto;
+  }
+
+  .item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img {
+    height: auto;
+    max-height: 56px;
+    max-width: 56px;
+    width: auto;
+  }
+
+  ion-textarea {
+    height: auto;
+    min-height: 647px;
+    overflow-y: hidden !important;
+    resize: vertical;
+  }
+
+  .bottom-spacer {
+    background-color: $white;
+    height: 0;
+  }
+}

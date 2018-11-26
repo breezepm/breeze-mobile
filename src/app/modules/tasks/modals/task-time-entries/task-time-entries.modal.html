@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Time tracking</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only color="primary" (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <span>Back</span>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button (click)="addEntry($event)" ion-button icon-only color="primary" *ngIf="focused && !currentUser.observer ">
+        <span>Add</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <modal-preloader></modal-preloader>
+</ion-header>
+
+<ion-content margin-top padding-top>
+  <ion-list>
+    <ion-item>
+      <ion-input
+        type="text"
+        placeholder="Log time"
+        (focusin)="onFocusIn($event)"
+        (keyup)="addEntry($event)"
+        [(ngModel)]="tracked"
+        [readonly]="currentUser.observer"
+      >
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="timeEntries.length > 0">
+    <ion-list-header>
+      Tracked time
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let entry of timeEntries; trackBy: trackById">
+      <ion-item *ngIf="entry != null">
+        <ion-row class="row">
+          <ion-col col-3>{{ entry.logged_date | date: 'MMM d' }}</ion-col>
+          <ion-col col-3>{{ entry.tracked | hourMinFormat}}</ion-col>
+          <ion-col class="user-name">{{ entry.user_name }}</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="right" *ngIf="entry.owner">
+        <button ion-button color="danger" icon-left (click)="deleteEntry(entry)">
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
