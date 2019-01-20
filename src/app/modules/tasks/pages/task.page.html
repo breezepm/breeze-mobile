@@ -29,7 +29,7 @@
     </ion-item>
     <form novalidate [formGroup]="taskNameForm">
       <ion-item class="task-name">
-        <ion-textarea type="text" contenteditable autoresize [disabled]="currentUser.observer" placeholder="Task Name"
+        <ion-textarea type="text" contenteditable autoresize autocorrect="on" [disabled]="currentUser.observer" placeholder="Task Name"
                       formControlName="name" (keyup)="updateTaskName($event)" (ionBlur)="updateTaskName($event)"
                       (focusin)="getPrevTaskName()" (keydown)="preventNextLine($event)">
         </ion-textarea>
@@ -96,7 +96,7 @@
 
     <div class="comment-wrapper" *ngIf="!task.deleted_at" margin-top margin-bottom>
       <ion-item class="comment-input">
-        <ion-textarea #textInput type="text" autoresize placeholder="Write a comment"
+        <ion-textarea #textInput type="text" autocorrect="on" autoresize placeholder="Write a comment"
             (keyup)="saveComment($event)" [mention]="taskUsers" contenteditable="true"
             (itemSelected)="addMentionIdToArray($event)" [innerHtml]="initialAddCommentHtml | safeHtml"
             [viewHeight]="200" [isTaskPage]="true" [textareaValue]="" [taskPageSaveEvent]="taskPageSaveEvent">

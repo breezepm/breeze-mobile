@@ -38,10 +38,11 @@
   </div>
   <div class="comment-section">
     <ion-item class="comment-input">
-      <ion-textarea
+      <ion-textarea 
         #textInput
         type="text"
         contenteditable="true"
+				autocorrect="on"
         placeholder="Write a comment"
         [innerHtml]="comment.comment | safeHtml"
         [mention]="taskUsers"

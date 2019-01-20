@@ -13,10 +13,11 @@
 
 <ion-content>
   <ion-item>
-    <ion-textarea
+    <ion-textarea 
       #textInput
       type="text"
       contenteditable
+			autocorrect="on"
       placeholder="Add a description"
       [mention]="taskUsers"
       (itemSelected)="addMentionIdToArray($event)"

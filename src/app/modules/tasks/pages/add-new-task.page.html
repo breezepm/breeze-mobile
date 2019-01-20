@@ -11,12 +11,12 @@
     <ion-list padding-top>
       <ion-item [ngClass]="{ 'invalid-name': taskForm.get('name').errors && isFormSent }">
         <ion-label floating>Name</ion-label>
-        <ion-input type="text" formControlName="name"></ion-input>
+        <ion-input type="text" autocorrect="on" formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Description</ion-label>
-        <ion-input type="text" formControlName="description"></ion-input>
+        <ion-input type="text" autocorrect="on" formControlName="description"></ion-input>
       </ion-item>
       <ion-item [ngClass]="{ 'invalid-project': taskForm.get('projectId').errors && isFormSent }">
         <ion-label>Project</ion-label>

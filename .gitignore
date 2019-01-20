@@ -4,7 +4,6 @@
 *~
 *.sw[mnpcod]
 *.log
-*.apk
 *.tmp
 *.tmp.*
 log.txt
@@ -35,5 +34,7 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .sourcemaps
+*.apk
+.gradle/*
 breeze-ionic.keystore
 android-build.sh

@@ -4,6 +4,7 @@
       <form *ngIf="!isTablet" [formGroup]="stageForm" novalidate (submit)="updateStageName()" class="stage-name">
         <ion-input
           type="text"
+					autocorrect="on"
           text-center
           formControlName="stageName"
           (focusout)="updateStageName($event)"

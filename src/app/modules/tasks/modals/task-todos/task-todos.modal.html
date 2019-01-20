@@ -26,7 +26,7 @@
   <ion-list [hidden]="!isTodoListFormVisible">
     <form novalidate [formGroup]="todoListForm" class="todo-list-form">
       <ion-item>
-        <ion-textarea #listNameInput type="text" contenteditable autoresize placeholder="Add to-do list..."
+        <ion-textarea #listNameInput type="text" autocorrect="on" contenteditable autoresize placeholder="Add to-do list..."
             formControlName="name"
             (ionBlur)="saveTodoList($event)"
             (keydown)="saveNew($event)">
@@ -38,7 +38,7 @@
   <ion-list *ngFor="let list of task.todo_lists; trackBy: trackById" class="todo-list-contain">
     <ion-item-sliding>
       <ion-item>
-        <ion-textarea type="text" contenteditable autoresize
+        <ion-textarea type="text" autocorrect="on" contenteditable autoresize
             (focusin)="getPrevTodoListName(list.name)"
             (ionBlur)="updateTodoListName(list)"
             (keydown)="updateTaskName($event, list)"
@@ -57,11 +57,12 @@
         <button class="toggle-todo-status" clear ion-button item-left (click)="changeTodoStatus(todo)">
           <ion-icon [name]="todo.done ? 'checkmark-circle-outline' : 'radio-button-off'"></ion-icon>
         </button>
-        <ion-textarea
+        <ion-textarea 
           rows="1"
           cols="1"
           autoresize
           type="text"
+					autocorrect="on"
           placeholder="Todo name"
           [(ngModel)]="todo.name"
           (focusin)="getPrevTodo(todo)"
@@ -97,13 +98,14 @@
 
     <form novalidate [formGroup]="todoForm" class="todo-form">
       <ion-item>
-        <ion-textarea
+        <ion-textarea 
           rows="1"
           cols="1"
           class="todo-textarea"
           #todoTextArea
           autoresize
           type="text"
+					autocorrect="on"
           placeholder="Add todo..."
           formControlName="name"
           (keyup)="saveTodo($event, list.id, todoTextArea)"

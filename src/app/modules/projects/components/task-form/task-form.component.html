@@ -5,8 +5,10 @@
 
 <form novalidate *ngIf="isFieldVisible" (submit)="addNewTask()" [formGroup]="taskForm">
   <ion-item no-lines>
-    <ion-textarea
+    <ion-textarea 
       autoresize
+			type="text"
+			autocorrect="on"
       formControlName="taskName"
       (ionBlur)="addNewTask($event)"
       (keyup)="addNewTask($event)"
